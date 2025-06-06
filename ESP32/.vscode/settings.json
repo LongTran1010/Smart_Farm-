@@ -1,0 +1,6 @@
+{
+    "cmake.sourceDirectory": "D:/IOT/ESP32/Test_ESP32/Assignment_IOT/lib/ArduinoJson/src",
+    "files.associations": {
+        "cmath": "cpp"
+    }
+}
