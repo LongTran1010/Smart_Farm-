@@ -1,0 +1,3 @@
+0 Lá xanh
+1 Lá vàng
+2 Lá khô héo
