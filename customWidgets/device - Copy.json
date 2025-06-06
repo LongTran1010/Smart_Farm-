@@ -1,0 +1,24 @@
+{
+  "fqn": "device_card_rpc_switch_tb",
+  "name": "Device Card + TB Switch Control",
+  "description": "Card thiết bị với công-tắc tb-switch-control (gửi RPC setValuePump).",
+  "deprecated": false,
+  "image": "",
+  "descriptor": {
+    "type": "control",               
+    "sizeX": 3,
+    "sizeY": 4,
+
+    "templateHtml": "<div class='main-widget'>\n  <div class='main'>\n    <div class='image-container'>\n      <img class='image' [src]=\"imageName\" />\n    </div>\n    <div class='icons'>\n      <!-- tb-switch-control: thành phần gốc của Core IoT  -->\n      <tb-switch-control \n          [value]=\"switchState\"                \n          (valueChange)=\"switchState=$event\"  \n          [requestTimeout]=\"requestTimeout\"   \n          [showOnOffLabels]=\"false\"           \n          [targetDeviceId]=\"entityId\"         \n          method-name=\"{{setValueMethod}}\">\n      </tb-switch-control>\n    </div>\n  </div>\n  <div class='footer'>\n    <h2 class='deviceTitle'>{{deviceTitle}}</h2>\n    <h3 class='deviceSubtitle'>{{deviceSubtitle}}</h3>\n  </div>\n</div>",
+
+    "templateCss": ".main-widget{display:flex;flex-direction:column;height:100%;justify-content:center;align-items:center}.main{display:flex;justify-content:space-between;width:100%;padding:10px}.icons{display:flex;flex-direction:column;align-items:flex-end;gap:10px}.image{max-width:100%;height:150px;object-fit:contain}.image-container{display:flex;justify-content:center;align-items:center}.footer{padding-left:10px;width:100%}.footer h2{margin:0;font-size:1.2rem;font-family:'Trebuchet MS';font-weight:500}.footer h3{margin:0;font-size:.8rem;font-family:'Trebuchet MS';color:#B6C3DB}",
+
+    "controllerScript": "self.onInit = function(){\n  const s  = self.ctx.settings;\n  const sc = self.ctx.$scope;\n  sc.deviceTitle    = s.deviceTitle    || 'Pump';\n  sc.deviceSubtitle = s.deviceSubtitle || 'DC-5V';\n  sc.imageName      = s.imageName      || '/api/images/public/erAngDWxiZGL7A6tNRFvbGTJziMLuCtS';\n  sc.switchState    = s.initialValue   || false;\n  sc.entityId       = s.entityId;                // UUID thiết bị\n  sc.setValueMethod = s.setValueMethod || 'setValuePump';\n  sc.requestTimeout = s.requestTimeout || 500;  // ms\n};\n\nself.onDataUpdated = function(){};",
+
+    "settingsSchema": "{\n  \"schema\":{\n    \"type\":\"object\",\n    \"title\":\"Settings\",\n    \"properties\":{\n      \"deviceTitle\":    {\"title\":\"Device Title\",    \"type\":\"string\",  \"default\":\"Pump\"},\n      \"deviceSubtitle\": {\"title\":\"Device Subtitle\", \"type\":\"string\",  \"default\":\"DC-5V\"},\n      \"imageName\":      {\"title\":\"Image URL\",       \"type\":\"string\"},\n      \"entityId\":       {\"title\":\"Device ID (UUID)\", \"type\":\"string\"},\n      \"setValueMethod\": {\"title\":\"RPC Method\",      \"type\":\"string\",  \"default\":\"setValuePump\"},\n      \"initialValue\":   {\"title\":\"Initial ON\",      \"type\":\"boolean\", \"default\":false},\n      \"requestTimeout\": {\"title\":\"Timeout (ms)\",    \"type\":\"integer\", \"default\":500}\n    }\n  },\n  \"form\":[\n    \"deviceTitle\",\n    \"deviceSubtitle\",\n    \"imageName\",\n    \"entityId\",\n    \"setValueMethod\",\n    \"initialValue\",\n    \"requestTimeout\"\n ]\n}",
+
+    "dataKeySettingsSchema": "{}",
+    "defaultConfig": "{\"showTitle\":false,\"backgroundColor\":\"#fff\",\"settings\":{\"deviceTitle\":\"Pump\",\"deviceSubtitle\":\"DC-5V\",\"imageName\":\"/api/images/public/erAngDWxiZGL7A6tNRFvbGTJziMLuCtS\",\"entityId\":\"\",\"setValueMethod\":\"setValuePump\",\"initialValue\":false,\"requestTimeout\":500},\"title\":\"Device Card + TB Switch Control\"}"
+  },
+  "tags": []
+}

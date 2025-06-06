@@ -1,0 +1,20 @@
+{
+  "fqn": "string_card",
+  "name": "String Card",
+  "deprecated": false,
+  "image": "tb-image:c3RyaW5nLWNhcmQucG5n:...",
+  "description": "Widget hiển thị tiêu đề cố định + giá trị chuỗi (string) từ key leaf_label.",
+  "descriptor": {
+    "type": "latest",
+    "sizeX": 3.5,
+    "sizeY": 2,
+    "resources": [],
+    "templateHtml": "<div class=\"main-widget\">\r\n    <h1 class=\"title\">{{title}}</h1>\r\n    <h2 class=\"value\">{{value}}</h2>\r\n</div>",
+    "templateCss": ".main-widget {\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n    height: 100%;\n}\n\n.title {\n    margin: 0;\n    font-family: 'Trebuchet MS', sans-serif;\n    font-size: 1.3rem;\n    font-weight: 800;\n    color: #333;\n}\n\n.value {\n    margin: 0;\n    margin-top: 8px;\n    font-family: 'Trebuchet MS', sans-serif;\n    font-size: 1.5rem;\n    font-weight: 700;\n    color: #1a73e8;\n}\n",
+    "controllerScript": "self.onInit = function() {\r\n    const ctxScope = self.ctx.$scope;\r\n    ctxScope.title = self.ctx.settings.title || \"Leaf Confidence\";\r\n    ctxScope.data = self.ctx.defaultSubscription.data[0];\r\n};\r\n\r\nself.onDataUpdated = function() {\r\n    const ctxScope = self.ctx.$scope;\r\n    try {\r\n        const rawData = self.ctx.defaultSubscription.data[0][0][1];\r\n        ctxScope.value = JSON.parse(rawData);\r\n    } catch (e) {\r\n        console.error('Error parsing string value', e);\r\n        ctxScope.value = \"\";\r\n    } finally {\r\n        self.ctx.detectChanges();\r\n    }\r\n};\r\n",
+    "settingsSchema": "{\r\n  \"schema\": {\r\n    \"type\": \"object\",\r\n    \"title\": \"Settings\",\r\n    \"properties\": {\r\n      \"title\": {\r\n        \"title\": \"Title\",\r\n        \"type\": \"string\",\r\n        \"default\": \"Leaf Confidence\"\r\n      }\r\n    }\r\n  },\r\n  \"form\": [\r\n    \"title\"\r\n  ]\r\n}\r\n",
+    "dataKeySettingsSchema": "{}\n",
+    "defaultConfig": "{\"datasources\":[{\"type\":\"device\",\"deviceAliases\":[],\"dataKeys\":[{\"name\":\"leaf_label\",\"type\":\"string\",\"label\":\"Leaf Label\",\"settings\":{}}]}],\"timewindow\":{\"realtime\":{\"timewindowMs\":60000}},\"showTitle\":false,\"backgroundColor\":\"#fff\",\"color\":\"rgba(0,0,0,0.87)\",\"padding\":\"0px\",\"settings\":{\"title\":\"Leaf Confidence\"},\"title\":\"String Card\",\"dropShadow\":false,\"enableFullscreen\":false,\"enableDataExport\":false,\"widgetStyle\":{},\"widgetCss\":\"\",\"pageSize\":1024,\"noDataDisplayMessage\":\"No data to display\"}"
+  },
+  "tags": null
+}
